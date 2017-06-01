@@ -15,9 +15,11 @@ module Paperclip
       dst = Tempfile.new([@basename, @current_format])
       dst.binmode
       begin
-        logger.error "FORMAT"
-        logger.error @current_format
-        success = Paperclip.run("ffmpeg -y -i #{src.path} -acodec copy -t #{@duration} -ss #{@offset} #{dst.path}")
+        if @current_format == "m4a"
+          success = Paperclip.run("ffmpeg -y -i #{src.path} -acodec libmp3lame -t #{@duration} -ss #{@offset} #{dst.path}")
+        else
+          success = Paperclip.run("ffmpeg -y -i #{src.path} -acodec copy -t #{@duration} -ss #{@offset} #{dst.path}")
+        end
       rescue PaperclipCommandLineError => e
         raise Paperclip::Error, "error while processing audio for #{@file}: #{e}"
       end
