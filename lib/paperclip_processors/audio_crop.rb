@@ -6,7 +6,7 @@ module Paperclip
       super
       @offset = options[:offset]
       @duration = options[:duration]
-      @current_format = File.extname(@file.path)
+      @current_format = "mp3"#File.extname(@file.path)
       @basename = File.basename(file.path)
     end
 
