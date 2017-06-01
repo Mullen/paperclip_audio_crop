@@ -12,7 +12,7 @@ module Paperclip
 
     def make
       src = @file
-      dst = Tempfile.new([@basename, "mp3"])
+      dst = Tempfile.new([@basename, ".mp3"])
       dst.binmode
       begin
         #if @current_format == "m4a"
